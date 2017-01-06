@@ -1,4 +1,5 @@
 const csvToJson = require('csvtojson');
+const moment = require('moment');
 /**
  * Parses csv containing batsman stats into jsonObj.
  * If batting_score ends with *, it removes * and sets notOut to true.
@@ -24,6 +25,7 @@ function parseSachinCsv(csvPath) {
                 if (jsonObj.opposition.startsWith('v ')) {
                     jsonObj.opposition = jsonObj.opposition.slice(2);
                 }
+                jsonObj.date = moment(jsonObj.date, 'M/D/YYYY');
                 jsonObj.balls_faced = Number(jsonObj.balls_faced);
                 jsonObj.strike_rate = Number(jsonObj.strike_rate);
                 jsonObj['4s'] = Number(jsonObj['4s']);

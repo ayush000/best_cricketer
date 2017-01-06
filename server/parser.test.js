@@ -1,4 +1,5 @@
 const path = require('path');
+const moment = require('moment');
 
 const parser = require('./parser');
 const constants = require('./constants');
@@ -13,7 +14,7 @@ it('parses csv into array of jsons', async () => {
         'stumps': 0,
         'opposition': 'Pakistan',
         'ground': 'Gujranwala',
-        'date': '12/18/1989',
+        'date': moment('12/18/1989', 'M/D/YYYY'),
         'match_result': 'lost',
         'result_margin': '7 runs',
         'toss': 'won',
