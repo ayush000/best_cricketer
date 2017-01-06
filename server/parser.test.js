@@ -1,6 +1,9 @@
+const path = require('path');
+
 const parser = require('./parser');
+const constants = require('./constants');
 it('parses csv into array of jsons', async () => {
-    const csv = await parser.parseSachinCsv();
+    const csv = await parser.parseSachinCsv(path.resolve(constants.csvPath));
     expect(csv.length).toEqual(463);
     expect(csv[0]).toEqual({
         'batting_score': 0,

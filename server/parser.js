@@ -1,9 +1,13 @@
 const csvToJson = require('csvtojson');
-const path = require('path');
-const constants = require('./constants');
-
-function parseSachinCsv() {
-    const csvPath = path.resolve(constants.csvPath);
+/**
+ * Parses csv containing batsman stats into jsonObj.
+ * If batting_score ends with *, it removes * and sets notOut to true.
+ * If opposition starts with 'v ' (E.g. 'v Bangladesh'), it removes 'v '.
+ * All NaN and dashes are set as null
+ * @param csvPath Path to csv containing scores
+ * @returns Promise On success, it returns an array of object.
+ */
+function parseSachinCsv(csvPath) {
     return new Promise(function (resolve, reject) {
         csvToJson({ checkType: false }).fromFile(csvPath)
             .transf((jsonObj) => {

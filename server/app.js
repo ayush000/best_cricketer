@@ -1,6 +1,7 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const path = require('path');
 
 const writeLog = require('./commonfunction').writeLog;
 const constants = require('./constants');
@@ -18,7 +19,7 @@ if (process.env.NODE_ENV !== 'test') {
 const listener = app.listen(process.env.PORT || 3001, () => {
     writeLog(`Listening on port ${listener.address().port}`);
     // Parse csv
-    parser.parseSachinCsv().then((csv) => {
+    parser.parseSachinCsv(path.resolve(constants.csvPath)).then((csv) => {
         app.get('/robot', (req, res) => {
             res.send(csv);
         });
