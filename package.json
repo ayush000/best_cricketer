@@ -3,20 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "concurrently": "^3.1.0",
+    "nodemon": "^1.11.0",
     "react-scripts": "0.8.4"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "csvtojson": "^1.1.2",
+    "express": "^4.14.0",
+    "fs-promise": "^1.0.0",
+    "morgan": "^1.7.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "recharts": "^0.20.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start_both": "concurrently --kill-others \"react-scripts start\" \"nodemon server/app.js\"",
+    "dev": "concurrently --kill-others \"react-scripts start\" \"nodemon --debug-brk=32836 --nolazy server/app.js\"",
+    "node": "nodemon server/app.js",
+    "react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   }
 }

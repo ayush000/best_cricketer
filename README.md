@@ -1,4 +1,6 @@
+
 # Sachin Tendulkar
+[![Build Status](https://travis-ci.org/ayush000/best_cricketer.svg?branch=master)](https://travis-ci.org/ayush000/best_cricketer)
 
 Wikipedia says, “Sachin Tendulkar is a former Indian cricketer, widely regarded to be the greatest cricketer of all time.”
 
