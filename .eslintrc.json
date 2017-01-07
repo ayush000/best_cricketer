@@ -8,6 +8,10 @@
             {
                 "allowTemplateLiterals": true
             }
+        ],
+        "comma-dangle": [
+            1,
+            "always-multiline"
         ]
     }
 }
