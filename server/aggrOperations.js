@@ -20,14 +20,23 @@ function getCardsData(csvObj) {
 }
 
 function getGraphsData(params, csvObj) {
-    let query = queries[params.graph_key];
+    let obj = queries[params.graph_key];
     if (params.group) {
-        query = queries[params.graph_key][params.group];
+        obj = queries[params.graph_key][params.group];
     }
+    const query = obj.query;
+
     console.log(query);
-    const data = alasql(query, [csvObj]);
-    if (data && data.length >= 1)
-        return data;
+    const rows = alasql(query, [csvObj]);
+    if (rows && rows.length >= 1)
+        return {
+            graphParams: {
+                xAxisLabel: obj.xAxisLabel,
+                yAxisLabel: obj.yAxisLabel,
+                title: obj.title,
+            },
+            rows,
+        };
     else throw new Error('empty string');
 }
 

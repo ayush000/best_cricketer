@@ -1,6 +1,12 @@
-.ant-col-6 {
+.ant-col-sm-12, .ant-col-lg-6 {
   margin: 0 0 8px;
 }
 .ant-row {
   text-align: center;
+}
+.ant-card-head-title {
+  color: white;
+}
+.ant-card-head {
+  background-color: #334961;
 }

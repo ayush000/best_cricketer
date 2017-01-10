@@ -26,17 +26,16 @@ export default class extends React.Component {
 
     render() {
         return (
-            <div style={{ background: '#ECECEC', padding: '30px' }}>
-                <Row gutter={16}>
-                    {Object.keys(this.state.data).map((title) => {
-                        return (<Col span="6" key={title}>
-                            <Card title={title} bodyStyle={{
-                                'fontSize': '6em',
+            <Row gutter={16}>
+                {Object.keys(this.state.data).map((title) => {
+                    return (<Col lg={6} sm={12} xs={24} key={title}>
+                        <Card title={title}
+                            bodyStyle={{
+                                'fontSize': '5vw',
                             }}>{this.state.data[title]}</Card>
-                        </Col>);
-                    })}
-                </Row>
-            </div>
+                    </Col>);
+                })}
+            </Row>
         );
     }
 };
