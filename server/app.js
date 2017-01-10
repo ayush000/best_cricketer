@@ -27,5 +27,14 @@ const listener = app.listen(process.env.PORT || 3001, () => {
         app.get('/api/cards', (req, res) => {
             res.send(aggrOperations.getCardsData(csvObj));
         });
+        app.get('/api/graph/:graph_key', (req, res) => {
+            if (!req.params.graph_key)
+                return res.status(404).send({ status: 404, message: 'Not found' });
+            const params = {
+                'graph_key': req.params.graph_key,
+                'group': req.query.group,
+            };
+            res.send(aggrOperations.getGraphsData(params,csvObj));
+        });
     });
 });

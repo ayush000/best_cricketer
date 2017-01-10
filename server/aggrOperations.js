@@ -1,5 +1,6 @@
 const alasql = require('alasql');
-function getCardsData(csv) {
+const queries = require('./graphLookup');
+function getCardsData(csvObj) {
     const query = 'SELECT Sum(batting_score)                          `Runs scored`, ' +
         '       Count(1)                                              `Matches played`, ' +
         '       Count(IF(notOut = true, 1, NULL))                     `Not outs`, ' +
@@ -12,11 +13,23 @@ function getCardsData(csv) {
         '       Sum(`4s`)                                             `4s`, ' +
         '       Sum(`6s`)                                             `6s` ' +
         'FROM   ?';
-
-    const data = alasql(query, [csv]);
-    if (data.length === 1)
+    const data = alasql(query, [csvObj]);
+    if (data && data.length === 1)
         return data[0];
-        else return new Error('empty string');
+    else throw new Error('empty string');
+}
+
+function getGraphsData(params, csvObj) {
+    let query = queries[params.graph_key];
+    if (params.group) {
+        query = queries[params.graph_key][params.group];
+    }
+    console.log(query);
+    const data = alasql(query, [csvObj]);
+    if (data && data.length >= 1)
+        return data;
+    else throw new Error('empty string');
 }
 
 exports.getCardsData = getCardsData;
+exports.getGraphsData = getGraphsData;

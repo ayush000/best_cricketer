@@ -26,7 +26,8 @@
   "scripts": {
     "start_both": "concurrently --kill-others \"react-scripts start\" \"nodemon server/app.js\"",
     "dev": "concurrently --kill-others \"react-scripts start\" \"nodemon --debug-brk=32836 --nolazy server/app.js\"",
-    "node": "nodemon server/app.js",
+    "node": "nodemon --harmony server/app.js",
+    "nodebug": "nodemon --debug=32836 --nolazy --harmony server/app.js",
     "react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
