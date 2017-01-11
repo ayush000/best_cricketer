@@ -1,7 +1,9 @@
 import React from 'react';
 import { Card } from 'antd';
 import { mount } from 'enzyme';
+import { parseJSON } from './commonfunction';
 
+jest.mock('./commonfunction', () => { return { 'parseJSON': jest.fn() }; });
 import CardGrid from './CardGrid';
 
 const mockResponse = (status, statusText, response) => {
@@ -14,24 +16,19 @@ const mockResponse = (status, statusText, response) => {
     });
 };
 
-it('renders 1 Card element', async () => {
-    // fetch = jest.fn().mockImplementation(() =>
-    //     Promise.resolve(mockResponse(200, null, '{"id":"1234", "idd":"a1234"}')));
-    const result = Promise.resolve(mockResponse(200, null, '{"id":"1234", "idd":"a1234"}'));
+
+
+it('renders 1 Card elements', async () => {
+    const result = Promise.resolve(mockResponse(200, null, '{"id":"1234"}'));
+    const parsedResult = Promise.resolve({ 'id': '1234' });
+    parseJSON.mockImplementation(() => parsedResult);
+    // eslint-disable-next-line no-native-reassign
     fetch = jest.fn(() => result);
     const wrapper = mount(<CardGrid />);
+    await result;
+    await parsedResult;
+
     expect(fetch).toBeCalled();
-    // expect(res).toEqual(1);
     expect(wrapper.find(CardGrid).length).toEqual(1);
-    await setTimeoutP();
-    expect(wrapper.find(Card).length).toEqual(2);
-
+    expect(wrapper.find(Card).length).toEqual(1);
 });
-
-function setTimeoutP() {
-    return new Promise(function (resolve, reject) {
-        setTimeout(() => {
-            resolve();
-        }, 1200);
-    });
-}

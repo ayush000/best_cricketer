@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarGraphToggle } from './Charts';
+import { BarGraphToggle, BarGraphSelect } from './Charts';
 import 'antd/dist/antd.css';
 class ConsistencyPanel extends React.Component {
     render() {
@@ -7,6 +7,9 @@ class ConsistencyPanel extends React.Component {
             <div>
                 <BarGraphToggle graph_key="totalRuns" />
                 <BarGraphToggle graph_key="battingHighlights" />
+                <BarGraphToggle graph_key="50s_100s" />
+                <BarGraphToggle graph_key="4s_6s" />
+                <BarGraphSelect graph_key="score_timeline" />
             </div>
         );
     }

@@ -25,18 +25,15 @@ function getGraphsData(params, csvObj) {
         obj = queries[params.graph_key][params.group];
     }
     const query = obj.query;
-
-    console.log(query);
     const rows = alasql(query, [csvObj]);
-    if (rows && rows.length >= 1)
+    if (rows && rows.length >= 1) {
+        const clone = Object.assign({}, obj);
+        delete clone.query;
         return {
-            graphParams: {
-                xAxisLabel: obj.xAxisLabel,
-                yAxisLabel: obj.yAxisLabel,
-                title: obj.title,
-            },
+            graphParams: clone,
             rows,
         };
+    }
     else throw new Error('empty string');
 }
 
