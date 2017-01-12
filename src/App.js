@@ -1,8 +1,9 @@
 import React from 'react';
+import MediaQuery from 'react-responsive';
+
 import './App.css';
 import CardGrid from './CardGrid';
 import Panels from './Panels';
-import MediaQuery from 'react-responsive';
 
 // import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 

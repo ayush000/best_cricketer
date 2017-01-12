@@ -57,7 +57,7 @@ class BarGraphToggle extends React.Component {
             <div>
                 <h1 style={{ textAlign: 'center', marginTop: 10 }}>{title}</h1>
                 <div style={{ overflow: 'hidden' }}>
-                    <RadioGroup style={{ float: 'right' }}
+                    <RadioGroup style={{ float: 'right', paddingRight: 35 }}
                         onChange={this.onChange} defaultValue="byYear">
                         <RadioButton value="byYear">Year</RadioButton>
                         <RadioButton value="byOpposition">Opposition</RadioButton>
@@ -119,7 +119,7 @@ class LineGraphToggle extends React.Component {
             <div>
                 <h1 style={{ textAlign: 'center', marginTop: 10 }}>{title}</h1>
                 <div style={{ overflow: 'hidden' }}>
-                    <RadioGroup style={{ float: 'right' }}
+                    <RadioGroup style={{ float: 'right', paddingRight: 35 }}
                         onChange={this.onChange} defaultValue="byYear">
                         <RadioButton value="byYear">Year</RadioButton>
                         <RadioButton value="byOpposition">Opposition</RadioButton>
@@ -207,7 +207,7 @@ class BarGraphSelect extends React.Component {
                 <h1 style={{ textAlign: 'center', marginTop: 10 }}>{title}</h1>
                 <div style={{ overflow: 'hidden' }}>
                     <Select
-                        style={{ float: 'right', width: 200 }}
+                        style={{ float: 'right', width: 200, paddingRight: 35 }}
                         placeholder="Opposition"
                         showSearch
                         optionFilterProp="children"
@@ -302,7 +302,7 @@ class BarGraphSelectScoreTimeline extends React.Component {
                 <h1 style={{ textAlign: 'center', marginTop: 10 }}>{title}</h1>
                 <div style={{ overflow: 'hidden' }}>
                     <Select
-                        style={{ float: 'right', width: 200 }}
+                        style={{ float: 'right', width: 200, paddingRight: 35 }}
                         placeholder="Opposition"
                         showSearch
                         optionFilterProp="children"
@@ -397,7 +397,7 @@ class LineGraphSelectScoreTimeline extends React.Component {
                 <h1 style={{ textAlign: 'center', marginTop: 10 }}>{title}</h1>
                 <div style={{ overflow: 'hidden' }}>
                     <Select
-                        style={{ float: 'right', width: 200 }}
+                        style={{ float: 'right', width: 200, paddingRight: 35 }}
                         placeholder="Opposition"
                         showSearch
                         optionFilterProp="children"
@@ -465,7 +465,7 @@ class StackBarGraphToggle extends React.Component {
             <div>
                 <h1 style={{ textAlign: 'center', marginTop: 10 }}>{title}</h1>
                 <div style={{ overflow: 'hidden' }}>
-                    <RadioGroup style={{ float: 'right' }}
+                    <RadioGroup style={{ float: 'right', paddingRight: 35 }}
                         onChange={this.onChange} defaultValue="byYear">
                         <RadioButton value="byYear">Year</RadioButton>
                         <RadioButton value="byOpposition">Opposition</RadioButton>
