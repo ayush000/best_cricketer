@@ -12,7 +12,7 @@ module.exports = {
         },
         'byOpposition': {
             title: 'Total runs scored',
-            xAxisLabel: 'Opposition',
+            xAxisLabel: 'Opp.',
             yAxisLabel: 'Runs',
             xAxisKey: 'opposition',
             legends: ['Runs scored'],
@@ -36,7 +36,7 @@ module.exports = {
         },
         'byOpposition': {
             title: 'Batting highlights',
-            xAxisLabel: 'Opposition',
+            xAxisLabel: 'Opp.',
             yAxisLabel: 'Runs',
             xAxisKey: 'opposition',
             legends: ['Strike rate', 'Average score per match', 'Highest score'],
@@ -62,7 +62,7 @@ module.exports = {
         },
         'byOpposition': {
             title: 'Centuries and Half Centuries',
-            xAxisLabel: 'Opposition',
+            xAxisLabel: 'Opp.',
             yAxisLabel: 'Count',
             xAxisKey: 'opposition',
             legends: ['Centuries', 'Half centuries'],
@@ -87,7 +87,7 @@ module.exports = {
         },
         'byOpposition': {
             title: 'Boundaries',
-            xAxisLabel: 'Opposition',
+            xAxisLabel: 'Opp.',
             yAxisLabel: 'Count',
             xAxisKey: 'opposition',
             legends: ['6s', '4s'],
