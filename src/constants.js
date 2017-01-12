@@ -4,4 +4,9 @@ const colors = ['#334961', '#7d87b9', '#bec1d4',
     '#d33f6a', '#11c638', '#8dd593', '#c6dec7',
     '#ead3c6', '#f0b98d', '#ef9708', '#0fcfc0',
     '#9cded6', '#d5eae7', '#f3e1eb', '#f6c4e1', '#f79cd4'];
-export { colors };
+
+let baseURL = 'http://localhost:3001';
+if (process.env.NODE_ENV === 'production') {
+    baseURL = location.origin.replace(/^https/, 'http');
+}
+export { colors, baseURL };

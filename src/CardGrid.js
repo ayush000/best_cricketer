@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Col, Row } from 'antd';
 import 'antd/dist/antd.css';
 
+import { baseURL } from './constants';
 import { parseJSON } from './commonfunction';
 import './CardGrid.css';
 
@@ -14,7 +15,7 @@ export default class extends React.Component {
     }
     fetchData = async () => {
         try {
-            const data = await parseJSON(await fetch('http://localhost:3001/api/cards'));
+            const data = await parseJSON(await fetch(`${baseURL}/api/cards`));
             this.setState({ data });
         } catch (e) {
             console.log(e);

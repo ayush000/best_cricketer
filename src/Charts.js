@@ -6,9 +6,9 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
 import { parseJSON } from './commonfunction';
-import { colors } from './constants';
+import { colors, baseURL } from './constants';
 async function fetchData(params) {
-    let url = `http://localhost:3001/api/graph/${params.graph_key}`;
+    let url = `${baseURL}/api/graph/${params.graph_key}`;
     if (params.group) {
         url += `?group=${params.group}`;
     }
@@ -35,7 +35,6 @@ class BarGraphToggle extends React.Component {
         });
     }
     onChange = (e) => {
-        console.log(`radio checked:${e.target.value}`);
         fetchData.call(this, {
             graph_key: this.props.graph_key,
             group: e.target.value,
@@ -98,7 +97,6 @@ class LineGraphToggle extends React.Component {
         });
     }
     onChange = (e) => {
-        console.log(`radio checked:${e.target.value}`);
         fetchData.call(this, {
             graph_key: this.props.graph_key,
             group: e.target.value,
@@ -350,7 +348,6 @@ class StackBarGraphToggle extends React.Component {
         });
     }
     onChange = (e) => {
-        console.log(`radio checked:${e.target.value}`);
         fetchData.call(this, {
             graph_key: this.props.graph_key,
             group: e.target.value,
