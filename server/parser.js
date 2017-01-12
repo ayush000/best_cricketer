@@ -25,7 +25,7 @@ function parseSachinCsv(csvPath) {
                 if (jsonObj.opposition.startsWith('v ')) {
                     jsonObj.opposition = jsonObj.opposition.slice(2);
                 }
-                jsonObj.date = moment(jsonObj.date, 'M/D/YYYY');
+                jsonObj.date = moment(jsonObj.date, 'M/D/YYYY').format('YYYY-MM-DD');
                 jsonObj.balls_faced = Number(jsonObj.balls_faced);
                 jsonObj.strike_rate = Number(jsonObj.strike_rate);
                 jsonObj['4s'] = Number(jsonObj['4s']);

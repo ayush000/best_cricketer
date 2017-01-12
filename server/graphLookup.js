@@ -53,7 +53,7 @@ module.exports = {
             xAxisLabel: 'Year',
             yAxisLabel: 'Count',
             xAxisKey: 'Year',
-            legends: ['Half centuries', 'Centuries'],
+            legends: ['Centuries', 'Half centuries'],
             query: 'SELECT Count(IF(batting_score >= 50 ' +
             '                AND batting_score < 100, 1, NULL))           `Half centuries`, ' +
             '       Count(IF(batting_score > 100, 1, NULL))               `Centuries`, ' +
@@ -65,7 +65,7 @@ module.exports = {
             xAxisLabel: 'Opposition',
             yAxisLabel: 'Count',
             xAxisKey: 'opposition',
-            legends: ['Half centuries', 'Centuries'],
+            legends: ['Centuries', 'Half centuries'],
             query: 'SELECT Count(IF(batting_score >= 50 ' +
             '                AND batting_score < 100, 1, NULL))           `Half centuries`, ' +
             '       Count(IF(batting_score > 100, 1, NULL))               `Centuries`, ' +
@@ -79,7 +79,7 @@ module.exports = {
             xAxisLabel: 'Year',
             yAxisLabel: 'Count',
             xAxisKey: 'Year',
-            legends: ['4s', '6s'],
+            legends: ['6s', '4s'],
             query: 'SELECT Sum(`4s`)        `4s`, ' +
             '       Sum(`6s`)               `6s`, ' +
             'YEAR(`date`)                         `Year` ' +
@@ -90,7 +90,7 @@ module.exports = {
             xAxisLabel: 'Opposition',
             yAxisLabel: 'Count',
             xAxisKey: 'opposition',
-            legends: ['4s', '6s'],
+            legends: ['6s', '4s'],
             query: 'SELECT Sum(`4s`)        `4s`, ' +
             '       Sum(`6s`)               `6s`, ' +
             '       opposition ' +
@@ -102,8 +102,21 @@ module.exports = {
         xAxisLabel: 'Date',
         yAxisLabel: 'Score',
         xAxisKey: 'date',
-        legends: ['batting_score'],
+        legends: ['Runs scored'],
         filter: 'opposition',
-        query: 'SELECT batting_score, opposition, `date` FROM ? WHERE balls_faced IS NOT NULL ORDER BY `date`',
+        query: 'SELECT batting_score AS `Runs scored`, ' +
+        '       opposition, ' +
+        '       ground `Ground`, ' +
+        '       match_result `Match result`, ' +
+        '       result_margin `Result margin`,' +
+        '       batting_innings `Batting innings`, ' +
+        '       balls_faced `Balls faced`, ' +
+        '       strike_rate `Strike rate`, ' +
+        '       `4s`, ' +
+        '       `6s`, ' +
+        '       `date` ' +
+        'FROM   ? ' +
+        'WHERE  balls_faced IS NOT NULL ' +
+        'ORDER  BY `date`',
     },
 };

@@ -14,7 +14,7 @@ it('parses csv into array of jsons', async () => {
         'stumps': 0,
         'opposition': 'Pakistan',
         'ground': 'Gujranwala',
-        'date': moment('12/18/1989', 'M/D/YYYY'),
+        'date': '1989-12-18',
         'match_result': 'lost',
         'result_margin': '7 runs',
         'toss': 'won',
@@ -23,6 +23,6 @@ it('parses csv into array of jsons', async () => {
         'strike_rate': 0,
         '4s': 0,
         '6s': 0,
-        'notOut': false
+        'notOut': false,
     });
 });

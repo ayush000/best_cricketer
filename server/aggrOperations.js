@@ -21,6 +21,9 @@ function getCardsData(csvObj) {
 
 function getGraphsData(params, csvObj) {
     let obj = queries[params.graph_key];
+    if (params.graph_key === 'cumulative_score') {
+        return getCumulativeScore(csvObj);
+    }
     if (params.group) {
         obj = queries[params.graph_key][params.group];
     }
@@ -35,6 +38,35 @@ function getGraphsData(params, csvObj) {
         };
     }
     else throw new Error('empty string');
+}
+
+function getCumulativeScore(csvObj) {
+    let newObj = [];
+    csvObj.reduce((a, b, i) => {
+        return newObj[i] = {
+            match: i + 1,
+            batting_score: a.batting_score + b.batting_score,
+            balls_faced: a.balls_faced + b.balls_faced,
+        };
+    }, { batting_score: 0, balls_faced: 0 });
+    newObj = newObj.map(row => {
+        return {
+            match: row.match,
+            'Cumulative runs': row.batting_score,
+            'Balls faced': row.balls_faced,
+        };
+    });
+
+    return {
+        graphParams: {
+            title: 'Cumulative runs scored',
+            xAxisLabel: 'Matches',
+            yAxisLabel: 'Number',
+            xAxisKey: 'match',
+            legends: ['Cumulative runs', 'Balls faced'],
+        },
+        rows: newObj,
+    };
 }
 
 exports.getCardsData = getCardsData;
