@@ -44,7 +44,7 @@ class BarGraphToggle extends React.Component {
     render() {
         if (!this.state.data || Object.keys(this.state.data).length === 0) {
             return (
-                <div height={250}>Loading</div>
+                <div></div>
             );
         }
         const rows = this.state.rows,
@@ -106,7 +106,7 @@ class LineGraphToggle extends React.Component {
     render() {
         if (!this.state.data || Object.keys(this.state.data).length === 0) {
             return (
-                <div height={250}>Loading</div>
+                <div></div>
             );
         }
         const rows = this.state.rows,
@@ -192,7 +192,7 @@ class BarGraphSelect extends React.Component {
     render() {
         if (!this.state.data || Object.keys(this.state.data).length === 0) {
             return (
-                <div height={250}>Loading</div>
+                <div></div>
             );
         }
         const rows = this.state.rows,
@@ -287,7 +287,7 @@ class BarGraphSelectScoreTimeline extends React.Component {
     render() {
         if (!this.state.data || Object.keys(this.state.data).length === 0) {
             return (
-                <div height={250}>Loading</div>
+                <div></div>
             );
         }
         const rows = this.state.rows,
@@ -357,7 +357,7 @@ class StackBarGraphToggle extends React.Component {
     render() {
         if (!this.state.data || Object.keys(this.state.data).length === 0) {
             return (
-                <div height={250}>Loading</div>
+                <div></div>
             );
         }
         const rows = this.state.rows,
@@ -427,7 +427,7 @@ class LineGraphCumulativeRuns extends React.Component {
     render() {
         if (!this.state.data || Object.keys(this.state.data).length === 0) {
             return (
-                <div height={250}>Loading</div>
+                <div></div>
             );
         }
         const rows = this.state.rows,
