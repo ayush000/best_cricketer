@@ -6,7 +6,8 @@
     "concurrently": "^3.1.0",
     "enzyme": "^2.7.0",
     "nodemon": "^1.11.0",
-    "react-addons-test-utils": "^15.4.2"
+    "react-addons-test-utils": "^15.4.2",
+    "react-scripts": "0.8.4"
   },
   "dependencies": {
     "alasql": "^0.3.5",
@@ -20,11 +21,11 @@
     "morgan": "^1.7.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "recharts": "^0.20.2",
-    "react-scripts": "0.8.4"
+    "recharts": "^0.20.2"
   },
   "scripts": {
-    "start": "react-scripts build && NODE_ENV=production node server/app.js",
+    "build": "react-scripts build",
+    "start": "NODE_ENV=production node server/app.js",
     "dev": "concurrently --kill-others \"react-scripts start\" \"nodemon --watch server --debug=32836 --nolazy server/app.js\"",
     "node": "nodemon --harmony server/app.js",
     "nodebug": "nodemon --debug=32836 --nolazy --harmony server/app.js",
