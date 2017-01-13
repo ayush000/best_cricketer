@@ -1,7 +1,11 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
-import { BarGraphToggle, BarGraphSelectScoreTimeline, LineGraphSelectScoreTimeline, StackBarGraphToggle, LineGraphToggle, LineGraphCumulativeRuns } from './Charts';
+import { BarGraphToggle, BarGraphSelect, LineGraphSelectScoreTimeline, StackBarGraphToggle, LineGraphToggle, LineGraphCumulativeRuns } from './Charts';
 import 'antd/dist/antd.css';
+
+/**
+ * Renders graph panel showcasing batsman's consistency
+ */
 class ConsistencyPanel extends React.Component {
     render() {
         return (
@@ -10,10 +14,10 @@ class ConsistencyPanel extends React.Component {
                 <LineGraphToggle aspect={this.props.aspect} graph_key="battingHighlights" />
                 <StackBarGraphToggle aspect={this.props.aspect} graph_key="50s_100s" />
                 <StackBarGraphToggle aspect={this.props.aspect} graph_key="4s_6s" />
-                <MediaQuery query='(min-width: 500px)'>
-                    <BarGraphSelectScoreTimeline aspect={this.props.aspect} graph_key="score_timeline" />
+                <MediaQuery minWidth={1000}>
+                    <BarGraphSelect aspect={this.props.aspect} graph_key="score_timeline" />
                 </MediaQuery>
-                <MediaQuery query='(max-width: 500px)'>
+                <MediaQuery maxWidth={1000}>
                     <LineGraphSelectScoreTimeline aspect={this.props.aspect} graph_key="score_timeline" />
                 </MediaQuery>
                 <LineGraphCumulativeRuns aspect={this.props.aspect} graph_key="cumulative_score" />

@@ -1,5 +1,14 @@
+/**
+ * Aggregation of data is done using alasql, an in memory SQL.
+ */
 const alasql = require('alasql');
 const queries = require('./graphLookup');
+
+/**
+ * Get data required for displaying counters
+ * @param {object} csvObj CSV containing matchwise details
+ * @returns {object} A single object containing aggregate performance
+ */
 function getCardsData(csvObj) {
     const query = 'SELECT Sum(batting_score)                          `Runs scored`, ' +
         '       Count(1)                                              `Matches played`, ' +
@@ -19,6 +28,14 @@ function getCardsData(csvObj) {
     else throw new Error('empty string');
 }
 
+/**
+ * Send aggregated data for a particular graph
+ * @param {object} params Parameters to select graph
+ * @param {string} params.graph_key The key to refer to in graphLookup.js
+ * @param {string=} params.group Second level key in graphLookup.js, specifies the grouping parameter
+ * @param {object} csvObj CSV containing matchwise details
+ * @returns {object} Contains all labels and data to display on a graph
+ */
 function getGraphsData(params, csvObj) {
     let obj = queries[params.graph_key];
     if (params.graph_key === 'cumulative_score') {
@@ -40,6 +57,11 @@ function getGraphsData(params, csvObj) {
     else throw new Error('empty string');
 }
 
+/**
+ * Get cumulative score, balls faced and match count
+ * @param {object} csvObj CSV containing matchwise details
+ * @returns {object} Cumulative sum of runs scored and balls faced, along with match number
+ */
 function getCumulativeScore(csvObj) {
     let newObj = [];
     csvObj.reduce((a, b, i) => {
@@ -71,3 +93,4 @@ function getCumulativeScore(csvObj) {
 
 exports.getCardsData = getCardsData;
 exports.getGraphsData = getGraphsData;
+exports.getCumulativeScore = getCumulativeScore;

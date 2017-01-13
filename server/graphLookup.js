@@ -1,3 +1,7 @@
+/**
+ * For every graph_key, a JS object is returned that corresponds to the graph data
+ * of that graph.
+ */
 module.exports = {
     'totalRuns': {
         'byYear': {

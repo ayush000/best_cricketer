@@ -1,5 +1,4 @@
 const path = require('path');
-const moment = require('moment');
 
 const parser = require('./parser');
 const constants = require('./constants');

@@ -4,7 +4,9 @@ import 'antd/dist/antd.css';
 
 import ConsistencyPanel from './ConsistencyPanel';
 
-
+/**
+ * Renders all graph panels
+ */
 class Panels extends React.Component {
     render() {
         return (

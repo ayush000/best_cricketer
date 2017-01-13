@@ -7,6 +7,10 @@ const { Header, Content, Footer } = Layout;
 
 // const RangePicker = DatePicker.RangePicker;
 // const Option = Select.Option;
+
+/**
+ * Create overall layout, header and footer for the content
+ */
 class AppLayout extends React.Component {
     render() {
         return (
@@ -57,7 +61,13 @@ class AppLayout extends React.Component {
 }
 */
 
+/**
+ * Header Component for the layout
+ */
 class DefaultHeader extends React.Component {
+    /**
+     * Truncates header text for small screen displays
+     */
     render() {
         return (
             <Header style={{ backgroundColor: '#334961' }}>

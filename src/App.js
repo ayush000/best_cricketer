@@ -14,10 +14,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <CardGrid />
-        <MediaQuery query='(min-width: 500px)'>
+        <MediaQuery minWidth={700}>
           <Panels padding="60px" aspect={4.0 / 1.5} />
         </MediaQuery>
-        <MediaQuery query='(max-width: 500px)'>
+        <MediaQuery minWidth={500} maxWidth={700}>
+          <Panels padding="0px" aspect={4.0 / 2.0} />
+        </MediaQuery>
+        <MediaQuery maxWidth={500}>
           <Panels padding="0px" aspect={4.0 / 2.5} />
         </MediaQuery>
       </div>
