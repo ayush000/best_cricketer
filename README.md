@@ -1,7 +1,10 @@
 
 # Sachin Tendulkar
 [![Build Status](https://travis-ci.org/ayush000/best_cricketer.svg?branch=master)](https://travis-ci.org/ayush000/best_cricketer)
+
+Go to project directory, type `npm install` to install dependencies and then type `npm start`, open `localhost:3001` and the app can be seen here.
 ## [Live demo here](http://sachin-analysis.herokuapp.com/)
+
 Wikipedia says, “Sachin Tendulkar is a former Indian cricketer, widely regarded to be the greatest cricketer of all time.”
 
 Here is the data on Sachin’s entire career: Download data [here](https://docs.google.com/spreadsheets/d/1OO7be4TdKe-2ahhJUzClEfIBvyAE0IQNFGDO1iimNuc/edit?usp=sharing)
