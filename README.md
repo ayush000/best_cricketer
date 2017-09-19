@@ -1,5 +1,7 @@
 
 # Sachin Tendulkar
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/ayush000/best_cricketer.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/ayush000/best_cricketer.svg?branch=master)](https://travis-ci.org/ayush000/best_cricketer)
 
 Go to project directory, type `npm install` to install dependencies and then type `npm start`, open `localhost:3001` and the app can be seen here.
