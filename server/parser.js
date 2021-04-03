@@ -16,7 +16,7 @@ async function parseSachinCsv(csvPath) {
     let batting_score = Number(jsonObj.batting_score);
 
     if (jsonObj?.batting_score?.endsWith("*")) {
-      jsonObj.notOut = true;
+      notOut = true;
       batting_score = Number(jsonObj.batting_score.slice(0, -1));
     }
 
