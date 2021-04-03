@@ -5,10 +5,11 @@ import 'antd/dist/antd.css';
 import { baseURL } from './constants';
 import { parseJSON } from './commonfunction';
 import './CardGrid.css';
+
 /**
  * A grid of counters displaying overall statistics
  */
-export default class extends React.Component {
+class CardGrid extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -51,3 +52,5 @@ export default class extends React.Component {
         );
     }
 };
+
+export default CardGrid;

@@ -2,11 +2,11 @@ import React from 'react';
 import { BarChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, ResponsiveContainer, Brush, LineChart, Line } from 'recharts';
 import { Radio, Select } from 'antd';
 import 'antd/dist/antd.css';
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
-
 import { parseJSON } from './commonfunction';
 import { colors, baseURL } from './constants';
+
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 
 /**
  * Fetches data from graphs api and sets the state of the caller component
@@ -22,7 +22,7 @@ async function fetchData(params) {
     }
     try {
         const data = await parseJSON(await fetch(url));
-        this.setState({ data, rows: data.rows });
+        return data;
     } catch (e) {
         console.log(e);
     }
@@ -43,22 +43,26 @@ class BarGraphToggle extends React.Component {
     /**
      * Fetch data and set the initial state variables
      */
-    componentDidMount() {
-        fetchData.call(this, {
+    async componentDidMount() {
+        const data = await fetchData({
             graph_key: this.props.graph_key,
             group: 'byYear',
         });
+
+        this.setState({ data, rows: data.rows });
     }
 
     /**
      * This function is called when x axis is toggled. It again calls the API
      * @param {object} e Object returned by radio button
      */
-    onChange = (e) => {
-        fetchData.call(this, {
+    onChange = async (e) => {
+        const data = await fetchData({
             graph_key: this.props.graph_key,
             group: e.target.value,
         });
+
+        this.setState({ data, rows: data.rows });
     }
 
     render() {
@@ -117,22 +121,25 @@ class LineGraphToggle extends React.Component {
     /**
      * Fetch data and set the initial state variables
      */
-    componentDidMount() {
-        fetchData.call(this, {
+    async componentDidMount() {
+        const data = await fetchData({
             graph_key: this.props.graph_key,
             group: 'byYear',
         });
+
+        this.setState({ data, rows: data.rows });
     }
 
     /**
      * This function is called when x axis is toggled. It again calls the API
      * @param {object} e Object returned by radio button
      */
-    onChange = (e) => {
-        fetchData.call(this, {
+    onChange = async (e) => {
+        const data = await fetchData({
             graph_key: this.props.graph_key,
             group: e.target.value,
         });
+        this.setState({ data, rows: data.rows });
     }
 
     render() {
@@ -195,15 +202,17 @@ class BarGraphSelect extends React.Component {
      * After the initial data is received from the API,
      * unique values of filterBy key are set as options of selector in addition to default 'All' option
      */
-    componentDidMount() {
-        fetchData.call(this, {
+    async componentDidMount() {
+        const data = await fetchData({
             graph_key: this.props.graph_key,
-        }).then(() => {
-            const rows = this.state.rows,
-                filterBy = this.state.data.graphParams.filter;
-            this.setState({
-                selectOptions: ['All', ...new Set(rows.map(row => row[filterBy]))], // Array of unique options of filter value
-            });
+        });
+
+        const {rows} = data;
+        const filterBy = data.graphParams.filter;
+        this.setState({
+            data,
+            rows,
+            selectOptions: ['All', ...new Set(rows.map(row => row[filterBy]))], // Array of unique options of filter value
         });
     }
 
@@ -230,21 +239,22 @@ class BarGraphSelect extends React.Component {
      * Renders all data in payload and displays it as Tooltip
      */
     renderTooltip = (x) => {
-        if (x.active)
-            return (
-                <div style={{ backgroundColor: 'white', borderStyle: 'solid', borderColor: '#f5f5f5', borderWidth: 2 }}>
-                    {Object.keys(x.payload[0].payload).map((key, i) =>
-                        <p style={{ color: colors[i % colors.length] }} key={key}>{`${key} : ${x.payload[0].payload[key]}`}</p>
-                    )}
-                </div>
-            );
+        if (!x.active) {
+            return null;
+        }
+
+        return (
+            <div style={{ backgroundColor: 'white', borderStyle: 'solid', borderColor: '#f5f5f5', borderWidth: 2 }}>
+                {Object.keys(x.payload[0].payload).map((key, i) =>
+                    <p style={{ color: colors[i % colors.length] }} key={key}>{`${key} : ${x.payload[0].payload[key]}`}</p>
+                )}
+            </div>
+        );
     }
 
     render() {
         if (!this.state.data || Object.keys(this.state.data).length === 0) {
-            return (
-                <div></div>
-            );
+            return null;
         }
         const rows = this.state.rows,
             xAxisLabel = this.state.data.graphParams.xAxisLabel,
@@ -308,16 +318,18 @@ class LineGraphSelectScoreTimeline extends React.Component {
      * After the initial data is received from the API,
      * unique values of filterBy key are set as options of selector in addition to default 'All' option
      */
-    componentDidMount() {
-        fetchData.call(this, {
+    async componentDidMount() {
+        const data = await fetchData({
             graph_key: this.props.graph_key,
-        }).then(() => {
-            const rows = this.state.rows,
-                filterBy = this.state.data.graphParams.filter;
-            this.setState({
-                selectOptions: ['All', ...new Set(rows.map(row => row[filterBy]))], // Array of unique options of filter value
-            });
         });
+
+        const {rows} = data;
+        const filterBy = data.graphParams.filter;
+        this.setState({
+            data,
+            rows, 
+            selectOptions: ['All', ...new Set(rows.map(row => row[filterBy]))], // Array of unique options of filter value
+         });
     }
 
     /**
@@ -420,22 +432,26 @@ class StackBarGraphToggle extends React.Component {
     /**
      * Fetch data and set the initial state variables
      */
-    componentDidMount() {
-        fetchData.call(this, {
+    async componentDidMount() {
+        const data = await fetchData({
             graph_key: this.props.graph_key,
             group: 'byYear',
         });
+
+        this.setState({ data, rows: data.rows });
     }
 
     /**
      * This function is called when x axis is toggled. It again calls the API
      * @param {object} e Object returned by radio button
      */
-    onChange = (e) => {
-        fetchData.call(this, {
+    onChange = async (e) => {
+        const data = await fetchData({
             graph_key: this.props.graph_key,
             group: e.target.value,
         });
+
+        this.setState({ data, rows: data.rows });
     }
 
     render() {
@@ -493,32 +509,34 @@ class LineGraphCumulativeRuns extends React.Component {
         };
     }
 
-    componentDidMount() {
-        fetchData.call(this, {
+    async componentDidMount() {
+        const data = await fetchData({
             graph_key: this.props.graph_key,
         });
+
+        this.setState({ data, rows: data.rows });
     }
 
     renderTooltip = (x) => {
-        if (x.active) {
-            const payload = x.payload[0].payload;
-            return (
-                <div style={{ backgroundColor: 'white', borderStyle: 'solid', borderColor: '#f5f5f5', borderWidth: 2 }}>
-                    <p>{x.label}</p>
-                    {Object.keys(payload).slice(1).map((key, i) =>
-                        <p style={{ color: colors[i % colors.length] }} key={key}>{`${key} : ${x.payload[0].payload[key]}`}</p>
-                    )}
-                    <p style={{ color: colors[4] }}>Strike rate: {(payload['Cumulative runs'] * 100 / payload['Balls faced']).toFixed(2)}</p>
-                </div>
-            );
+        if (!x.active) {
+            return null;
         }
+
+        const payload = x.payload[0].payload;
+        return (
+            <div style={{ backgroundColor: 'white', borderStyle: 'solid', borderColor: '#f5f5f5', borderWidth: 2 }}>
+                <p>{x.label}</p>
+                {Object.keys(payload).slice(1).map((key, i) =>
+                    <p style={{ color: colors[i % colors.length] }} key={key}>{`${key} : ${x.payload[0].payload[key]}`}</p>
+                )}
+                <p style={{ color: colors[4] }}>Strike rate: {(payload['Cumulative runs'] * 100 / payload['Balls faced']).toFixed(2)}</p>
+            </div>
+        );
     }
 
     render() {
         if (!this.state.data || Object.keys(this.state.data).length === 0) {
-            return (
-                <div></div>
-            );
+            return null;
         }
         const rows = this.state.rows,
             xAxisLabel = this.state.data.graphParams.xAxisLabel,

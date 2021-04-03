@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const path = require('path');
@@ -12,9 +11,9 @@ const aggrOperations = require('./aggrOperations');
 const app = express();
 app.use(cors());
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 // parse application/json
-app.use(bodyParser.json());
+app.use(express.json());
 
 if (process.env.NODE_ENV !== 'test') {
     app.use(logger('dev'));

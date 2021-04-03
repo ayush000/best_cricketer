@@ -1,5 +1,5 @@
-const csvToJson = require('csvtojson');
-const moment = require('moment');
+const csvToJson = require("csvtojson");
+const moment = require("moment");
 /**
  * Parses csv containing batsman stats into jsonObj.
  * If batting_score ends with *, it removes * and sets notOut to true.
@@ -8,40 +8,48 @@ const moment = require('moment');
  * @param csvPath Path to csv containing scores
  * @returns Promise On success, it returns an array of object.
  */
-function parseSachinCsv(csvPath) {
-    return new Promise(function (resolve, reject) {
-        csvToJson({ checkType: false }).fromFile(csvPath)
-            .transf((jsonObj) => {
-                jsonObj.notOut = false;
-                if (jsonObj.batting_score.endsWith('*')) {
-                    jsonObj.notOut = true;
-                    jsonObj.batting_score = jsonObj.batting_score.slice(0, -1);
-                }
-                jsonObj.batting_score = Number(jsonObj.batting_score);
-                jsonObj.wickets = Number(jsonObj.wickets);
-                jsonObj.runs_conceded = Number(jsonObj.runs_conceded);
-                jsonObj.catches = Number(jsonObj.catches);
-                jsonObj.stumps = Number(jsonObj.stumps);
-                if (jsonObj.opposition.startsWith('v ')) {
-                    jsonObj.opposition = jsonObj.opposition.slice(2);
-                }
-                jsonObj.date = moment(jsonObj.date, 'M/D/YYYY').format('YYYY-MM-DD');
-                jsonObj.balls_faced = Number(jsonObj.balls_faced);
-                jsonObj.strike_rate = Number(jsonObj.strike_rate);
-                jsonObj['4s'] = Number(jsonObj['4s']);
-                jsonObj['6s'] = Number(jsonObj['6s']);
-                for (var key in jsonObj) {
-                    if (typeof jsonObj[key] === 'number' && isNaN(jsonObj[key]))
-                        jsonObj[key] = null;
-                }
+async function parseSachinCsv(csvPath) {
+  const jsonArr = await csvToJson({ checkType: false }).fromFile(csvPath);
 
-            })
-            .on('end_parsed', (jsonArrObj) => {
-                return resolve(jsonArrObj);
-            })
-            .on('done', (err) => {
-                if (err) return reject(err);
-            });
-    });
+  const outputArr = jsonArr.map((jsonObj) => {
+    let notOut = false;
+    let batting_score = Number(jsonObj.batting_score);
+
+    if (jsonObj?.batting_score?.endsWith("*")) {
+      jsonObj.notOut = true;
+      batting_score = Number(jsonObj.batting_score.slice(0, -1));
+    }
+
+    let opposition = jsonObj.opposition;
+    if (jsonObj?.opposition?.startsWith("v ")) {
+      opposition = jsonObj.opposition.slice(2);
+    }
+
+    const outputObj = {
+      ...jsonObj,
+      notOut,
+      batting_score,
+      wickets: Number(jsonObj.wickets),
+      runs_conceded: Number(jsonObj.runs_conceded),
+      catches: Number(jsonObj.catches),
+      stumps: Number(jsonObj.stumps),
+      opposition,
+      date: moment(jsonObj.date, "M/D/YYYY").format("YYYY-MM-DD"),
+      balls_faced: Number(jsonObj.balls_faced),
+      strike_rate: Number(jsonObj.strike_rate),
+      "4s": Number(jsonObj["4s"]),
+      "6s":Number(jsonObj["6s"]),
+    };
+
+    for (let key in outputObj) {
+      if (typeof outputObj[key] === "number" && isNaN(outputObj[key]))
+      outputObj[key] = null;
+    }
+
+    return outputObj;
+  })
+
+  return outputArr
+
 }
 exports.parseSachinCsv = parseSachinCsv;

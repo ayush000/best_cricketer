@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, DatePicker, Row, Col, Affix, Select } from 'antd';
+import { Layout } from 'antd';
 import MediaQuery from 'react-responsive';
 // import moment from 'moment';
 import App from './App';
@@ -26,40 +26,6 @@ class AppLayout extends React.Component {
         );
     }
 }
-/*class DefaultHeader extends React.Component {
-    render() {
-        return (
-            <Affix>
-                <Header style={{ width: '100vw', backgroundColor: '#334961' }}>
-                    <Row>
-                        <Col span={8}>
-                            <div style={{ color: 'white', fontSize: '16px', textAlign: 'left' }}>
-                                Sachin Tendulkar
-                                </div>
-                        </Col>
-                        <Col span={8}>
-                            <RangePicker />
-                        </Col>
-                        <Col span={8}>
-                            <Col span={4}>
-                                <Select size="small" style={{ width: 120 }}>
-                                    <Option value="jack">Jack</Option>
-                                    <Option value="lucy">Lucy</Option>
-                                </Select>
-                            </Col>
-                            <Select size="small" style={{ width: 120 }}>
-                                <Option value="jack">Jack</Option>
-                                <Option value="lucy">Lucy</Option>
-                            </Select>
-                        </Col>
-                    </Row>
-                </Header>
-            </Affix>
-
-        );
-    }
-}
-*/
 
 /**
  * Header Component for the layout
